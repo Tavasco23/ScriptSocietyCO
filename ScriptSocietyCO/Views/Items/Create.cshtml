@@ -1,0 +1,56 @@
+﻿@model ScriptSocietyCO.Models.Item
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Product Details Section -->
+        <div class="col-md-6">
+            <h1 class="mb-3">Create</h1>
+            <p class="text-muted">Item</p>
+            <p><strong>Color:</strong> <input asp-for="Color" class="form-control" /></p>
+            <p class="h4 text-danger">PHP <input asp-for="Price" class="form-control" /></p>
+
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!-- Size Selection -->
+                <div class="form-group mb-3">
+                    <label asp-for="Size" class="control-label"><strong>Size:</strong></label>
+                    <select asp-for="Size" class="form-control">
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                </div>
+
+                <!-- Stock Availability -->
+                <p class="text-muted">Stock: <input asp-for="StockTotal" class="form-control" /></p>
+
+                <!-- Quantity Selector -->
+                <div class="form-group mb-3 d-flex align-items-center">
+                    <button type="button" class="btn btn-outline-secondary">-</button>
+                    <input type="number" id="quantity" class="form-control text-center mx-2" value="1" min="1" max="StockTotal">
+                    <button type="button" class="btn btn-outline-secondary">+</button>
+                </div>
+
+                <!-- Buy Now Button -->
+                <div class="form-group">
+                    <a asp-controller="Items" asp-action="Index" class="btn btn-primary mr-2">Buy Now</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
